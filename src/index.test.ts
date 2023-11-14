@@ -28,7 +28,6 @@ describe("createYupEndpoint", () => {
   it("returns the same data it receives", () => {
     const mockEndpoint = createYupEndpoint({
       path: "/test",
-      handler: jest.fn().mockImplementation(async () => {}),
     })
     const result = createYupEndpoint(mockEndpoint)
     expect(result).toEqual(mockEndpoint)

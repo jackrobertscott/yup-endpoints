@@ -1,4 +1,3 @@
-import { IncomingMessage, ServerResponse } from "http"
 import * as yup from "yup"
 
 /**
@@ -24,21 +23,6 @@ export const fileDataSchema = yup.object().shape({
 export type FileData = yup.InferType<typeof fileDataSchema>
 
 /**
- * Type definition for an endpoint handler function using Yup.
- * @template I - Input type that extends yup.Schema
- * @template O - Output type that extends yup.Schema
- * @param {IncomingMessage} request - The incoming HTTP request.
- * @param {ServerResponse} response - The outgoing HTTP response.
- * @param {I} body - The validated request body.
- * @returns {Promise<O>} - The promise of the output type.
- */
-export type YupEndpointHandler<I, O> = (
-  request: IncomingMessage,
-  response: ServerResponse,
-  body: I
-) => Promise<O>
-
-/**
  * Type definition for an endpoint configuration object using Yup.
  * @template I - Input type that extends yup.Schema
  * @template O - Output type that extends yup.Schema
@@ -53,10 +37,6 @@ export type YupEndpoint<I extends yup.Schema, O extends yup.Schema> = {
   in?: I
   out?: O
   hang?: boolean
-  handler: YupEndpointHandler<
-    I extends yup.Schema ? yup.InferType<I> : unknown,
-    O extends yup.Schema ? yup.InferType<O> : unknown
-  >
 }
 
 /**
