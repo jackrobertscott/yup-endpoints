@@ -24,18 +24,15 @@ export type FileData = yup.InferType<typeof fileDataSchema>
 
 /**
  * Type definition for an endpoint configuration object using Yup.
- * @template I - Input type that extends yup.ObjectSchema
- * @template O - Output type that extends yup.ObjectSchema
+ * @template I - Input type that extends yup.Schema
+ * @template O - Output type that extends yup.Schema
  * @property {string} path - The path for the endpoint.
  * @property {I} [in] - Optional Yup schema for input validation.
  * @property {O} [out] - Optional Yup schema for output validation.
  * @property {boolean} [hang] - Optional flag to keep the connection open.
  * @property {YupEndpointHandler} handler - The handler function for the endpoint.
  */
-export type YupEndpoint<
-  I extends yup.ObjectSchema<any>,
-  O extends yup.ObjectSchema<any>
-> = {
+export type YupEndpoint<I extends yup.Schema, O extends yup.Schema> = {
   path: string
   in?: I
   out?: O
@@ -44,14 +41,13 @@ export type YupEndpoint<
 
 /**
  * Function to create a Yup endpoint.
- * @template I - Input type that extends yup.ObjectSchema
- * @template O - Output type that extends yup.ObjectSchema
+ * @template I - Input type that extends yup.Schema
+ * @template O - Output type that extends yup.Schema
  * @param {YupEndpoint<I, O>} data - The endpoint configuration object.
  * @returns {YupEndpoint<I, O>} - The created endpoint.
  */
-export function createYupEndpoint<
-  I extends yup.ObjectSchema<any>,
-  O extends yup.ObjectSchema<any>
->(data: YupEndpoint<I, O>): YupEndpoint<I, O> {
+export function createYupEndpoint<I extends yup.Schema, O extends yup.Schema>(
+  data: YupEndpoint<I, O>
+): YupEndpoint<I, O> {
   return data
 }
